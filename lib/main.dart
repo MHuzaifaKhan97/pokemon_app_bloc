@@ -1,10 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_cubit.dart';
+import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/screens/home_screen.dart';
+import 'package:pokemon_app_bloc/screens/login_screen.dart';
+import 'package:pokemon_app_bloc/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: ((context) => AuthCubit())),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +25,50 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+      ),
+      // home: BlocProvider(
+      //   create: (context) => AuthCubit(),
+      //   child: SplashScreen(),
+      // ),
+      // home: MultiBlocProvider(
+      //   providers: [
+      //     BlocProvider(create: ((context) => SplashCubit())),
+      //     BlocProvider(create: ((context) => AuthCubit())),
+      //   ],
+      //   child: BlocBuilder<SplashCubit, SplashState>(
+      //     builder: (context, state) {
+      //       if (state is SplashDoneState) {
+      //         return BlocBuilder<AuthCubit, AuthState>(
+      //           buildWhen: (previous, current) => previous is AuthInitialState,
+      //           builder: (context, state) {
+      //             if (state is AuthLoggedInState) {
+      //               return HomeScreen();
+      //             } else if (state is AuthLoggedOutState) {
+      //               return LoginScreen();
+      //             }
+      //             return Scaffold();
+      //           },
+      //         );
+      //       }
+      //       return SplashScreen();
+      //     },
+      //   ),
+      // ),
+      home: BlocProvider(
+        create: (context) => AuthCubit(),
+        child: BlocBuilder<AuthCubit, AuthState>(
+          buildWhen: (previous, current) => previous is AuthInitialState,
+          builder: (context, state) {
+            if (state is AuthLoggedInState) {
+              return HomeScreen();
+            } else if (state is AuthLoggedOutState) {
+              return LoginScreen();
+            } else if (state is AuthInitialState) {
+              return SplashScreen();
+            }
+            return Scaffold();
+          },
+        ),
       ),
     );
   }
