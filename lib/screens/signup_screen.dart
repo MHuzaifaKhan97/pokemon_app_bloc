@@ -110,7 +110,11 @@ class SignUpScreen extends StatelessWidget {
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                               builder: ((context) =>
-                                                  HomeScreen())));
+                                                  BlocProvider(
+                                                    create: (context) =>
+                                                        AuthCubit(),
+                                                    child: HomeScreen(),
+                                                  ))));
                                     } else if (state is AuthErrorState) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
