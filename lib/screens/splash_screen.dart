@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app_bloc/widgets/logo_widget.dart';
 
 class SplashScreen extends StatelessWidget {
-  // }
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Hero(
-              tag: "logo",
-              child: Image.asset(
-                "./assets/logo.png",
-                width: MediaQuery.of(context).size.width * 0.3,
-                fit: BoxFit.contain,
-              ))),
+      backgroundColor: const Color(0xFF1e81b0),
+      body: Center(child: Hero(tag: "logo", child: LogoWidget())),
     );
   }
 }

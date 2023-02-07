@@ -36,9 +36,9 @@ class CustomButton extends StatelessWidget {
       height: height ?? 45,
       decoration: BoxDecoration(
           // gradient: gradient,
-          color: Colors.blue,
+          color: Color(0xFF1e81b0),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 2, color: Colors.blue)),
+          border: Border.all(width: 2, color: Color(0xFF1e81b0))),
       child: MaterialButton(
         onPressed: onTap,
         child: isLoading

@@ -5,7 +5,7 @@ class RPSCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Colors.blue
+      ..color = Color(0xFF1e81b0)
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 
@@ -49,7 +49,7 @@ class PSCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Colors.blue.withOpacity(0.5)
+      ..color = Color(0xFF1e81b0).withOpacity(0.5)
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 

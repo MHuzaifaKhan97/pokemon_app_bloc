@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 32,
-                          color: Colors.blue,
+                          color: Color(0xFF1e81b0),
                         ),
                       ),
                       SizedBox(
@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: Colors.blue.withOpacity(0.6),
+                          color: Color(0xFF1e81b0).withOpacity(0.6),
                         ),
                       ),
                       SizedBox(
@@ -182,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                               TextSpan(
                                   text: ' Sign up',
                                   style: const TextStyle(
-                                      color: Colors.blue,
+                                      color: Color(0xFF1e81b0),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700),
                                   recognizer: TapGestureRecognizer()
