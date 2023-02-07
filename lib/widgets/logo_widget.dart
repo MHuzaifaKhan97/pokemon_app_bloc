@@ -16,11 +16,11 @@ class LogoWidget extends StatelessWidget {
         ),
         SizedBox(width: MediaQuery.of(context).size.width * 0.02),
         Text(
-          "POKEMON",
+          "Pokemon App",
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
-              fontSize: textSize ?? 38),
+              fontSize: textSize ?? 32),
         )
       ],
     );

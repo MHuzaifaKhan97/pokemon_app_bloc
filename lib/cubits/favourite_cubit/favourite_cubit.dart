@@ -85,7 +85,8 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     }
     String encodedList = jsonEncode(pokemons);
     prefs.setString(GlobalConstants.FAVOURITES, encodedList);
-    emit(FavouriteRemovedFavouriteState("Successfully removed from favorites"));
+    emit(
+        FavouriteRemovedFavouriteState("Successfully removed from favourites"));
     getFavouritePokemons();
   }
 }

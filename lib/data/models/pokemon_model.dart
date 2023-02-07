@@ -10,4 +10,12 @@ class PokemonModel {
     url = json['url'];
     uid = json['uid'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['url'] = this.url;
+    data['uid'] = this.uid;
+    return data;
+  }
 }
