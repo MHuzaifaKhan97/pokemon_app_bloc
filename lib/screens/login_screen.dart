@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               FormBuilderTextField(
                                 name: "email",
-                                // autovalidateMode: AutovalidateMode.always,
+                                maxLength: 40,
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
                                       errorText: "Email is required"),
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                                       0.02),
                               FormBuilderTextField(
                                 name: "password",
-                                // autovalidateMode: AutovalidateMode.always,
+                                maxLength: 20,
                                 obscureText: true,
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
