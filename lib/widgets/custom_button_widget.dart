@@ -10,12 +10,14 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.height,
     this.icon,
+    this.inverse = false,
   }) : super(key: key);
   final Function()? onTap;
   final String? title;
   final double? width;
   final double? height;
   final bool isLoading;
+  final bool? inverse;
   final Widget? icon;
 
   @override
@@ -24,15 +26,15 @@ class CustomButton extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width * 0.90,
       height: height ?? 45,
       decoration: BoxDecoration(
-          color: AppTheme.primaryColor,
+          color: inverse! ? AppTheme.colorWhite : AppTheme.primaryColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(width: 2, color: AppTheme.primaryColor)),
       child: MaterialButton(
         onPressed: onTap,
         child: isLoading
-            ? const Center(
+            ? Center(
                 child: CircularProgressIndicator(
-                  color: Colors.white,
+                  color: inverse! ? AppTheme.primaryColor : Colors.white,
                 ),
               )
             : Row(
@@ -41,10 +43,10 @@ class CustomButton extends StatelessWidget {
                   Text(
                     title!,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                        color: inverse! ? AppTheme.primaryColor : Colors.white),
                   ),
                   icon != null
                       ? const SizedBox(width: 8)

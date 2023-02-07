@@ -17,7 +17,7 @@ class FavouritePokemonListView extends StatelessWidget {
     return BlocListener<FavouriteCubit, FavouriteState>(
       listener: (context, state) {
         if (state is FavouriteRemovedFavouriteState) {
-          Utils.snackbar(state.message, context, AppTheme.colorSuccess);
+          Utils.snackbar(state.message, context, AppTheme.colorError);
         }
       },
       child: ListView.builder(

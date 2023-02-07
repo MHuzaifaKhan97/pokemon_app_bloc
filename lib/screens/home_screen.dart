@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
 import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_state.dart';
 import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_cubit.dart';
+import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/screens/login_screen.dart';
 import 'package:pokemon_app_bloc/screens/tabs/all_pokemons/all_pokemons_screen.dart';
 import 'package:pokemon_app_bloc/screens/tabs/favourites/favourite_pokemon_screen.dart';
@@ -48,7 +49,9 @@ class HomeScreen extends StatelessWidget {
                 builder: (context, state) {
                   return IconButton(
                       onPressed: () {
-                        BlocProvider.of<AuthCubit>(context).loggedOut();
+                        Utils.dialog(context, () {
+                          BlocProvider.of<AuthCubit>(context).loggedOut();
+                        });
                       },
                       icon: const Icon(Icons.logout));
                 },
