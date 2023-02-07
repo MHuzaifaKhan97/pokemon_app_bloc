@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
 import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:pokemon_app_bloc/screens/login_screen.dart';
 import 'package:pokemon_app_bloc/screens/tabs/all_pokemons/all_pokemons_screen.dart';
 import 'package:pokemon_app_bloc/screens/tabs/favourites/favourite_pokemon_screen.dart';
@@ -54,9 +55,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: const TabBarView(children: [
-            AllPokemonScreen(),
-            FavouritePokemonScreen(),
+          body: TabBarView(children: [
+            const AllPokemonScreen(),
+            BlocProvider(
+              create: (context) => FavouriteCubit(),
+              child: const FavouritePokemonScreen(),
+            ),
           ])),
     );
   }

@@ -46,10 +46,39 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       pokemons = <PokemonModel>[];
     }
     pokemon.uid = uid;
+    if (pokemons.isNotEmpty) {
+      var res = pokemons.where((el) => el.uid == uid && el.url == pokemon.url);
+      if (res.isNotEmpty) {
+        emit(FavouriteAlreadyExistsState("Favourite already exists"));
+        return;
+      }
+    }
     pokemons.add(pokemon);
+
     String encodedList = jsonEncode(pokemons);
     prefs.setString(GlobalConstants.FAVOURITES, encodedList);
     emit(FavouriteAddFavouriteState("Successfully added to favorites"));
+    getFavouritePokemons();
+  }
+
+  removeFavouritePokemon(PokemonModel pokemon, String uid) async {
+    final SharedPreferences prefs = await _prefs;
+    var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
+    List<PokemonModel> pokemons = <PokemonModel>[];
+    if (encodedData != null) {
+      List<dynamic> decodedData = jsonDecode(encodedData);
+      pokemons =
+          decodedData.map((post) => PokemonModel.fromJson(post)).toList();
+    } else {
+      pokemons = <PokemonModel>[];
+    }
+    pokemon.uid = uid;
+    if (pokemons.isNotEmpty) {
+      pokemons.removeWhere((el) => el.uid == uid && el.url == pokemon.url);
+    }
+    String encodedList = jsonEncode(pokemons);
+    prefs.setString(GlobalConstants.FAVOURITES, encodedList);
+    emit(FavouriteRemovedFavouriteState("Successfully removed from favorites"));
     getFavouritePokemons();
   }
 }

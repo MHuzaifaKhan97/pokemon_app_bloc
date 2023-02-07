@@ -4,6 +4,8 @@ import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
 import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_state.dart';
 import 'package:pokemon_app_bloc/data/models/pokemon_model.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
+import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/widgets/pokemon_view_widget.dart';
 
 class PokemonListView extends StatelessWidget {
@@ -14,8 +16,9 @@ class PokemonListView extends StatelessWidget {
     return BlocListener<FavouriteCubit, FavouriteState>(
       listener: (context, state) {
         if (state is FavouriteAddFavouriteState) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.green, content: Text(state.message)));
+          Utils.snackbar(state.message, context, AppTheme.colorSuccess);
+        } else if (state is FavouriteAlreadyExistsState) {
+          Utils.snackbar(state.message, context, AppTheme.colorWarning);
         }
       },
       child: ListView.builder(

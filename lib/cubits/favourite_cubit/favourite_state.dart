@@ -24,4 +24,9 @@ class FavouriteRemovedFavouriteState extends FavouriteState {
   FavouriteRemovedFavouriteState(this.message);
 }
 
+class FavouriteAlreadyExistsState extends FavouriteState {
+  final String message;
+  FavouriteAlreadyExistsState(this.message);
+}
+
 class FavouriteEmptyListState extends FavouriteState {}
