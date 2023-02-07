@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_app_bloc/resources/app_theme.dart';
-import 'package:pokemon_app_bloc/screens/signup_screen.dart';
 
 class RichTextTappableWidget extends StatelessWidget {
   RichTextTappableWidget(

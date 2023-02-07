@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:pokemon_app_bloc/resources/app_theme.dart';
 
@@ -37,7 +36,7 @@ class RPSCustomPainter extends CustomPainter {
     path0.close();
 
     canvas.drawPath(path0, paint0);
-    ;
+
   }
 
   @override
@@ -81,7 +80,7 @@ class PSCustomPainter extends CustomPainter {
     path0.close();
 
     canvas.drawPath(path0, paint0);
-    ;
+
   }
 
   @override
