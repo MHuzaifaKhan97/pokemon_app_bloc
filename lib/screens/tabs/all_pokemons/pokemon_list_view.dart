@@ -21,20 +21,23 @@ class PokemonListView extends StatelessWidget {
           Utils.snackbar(state.message, context, AppTheme.colorWarning);
         }
       },
-      child: ListView.builder(
-        itemCount: pokemons.length,
-        itemBuilder: (context, index) {
-          PokemonModel pokemon = pokemons[index];
-          return PokemonViewWidget(
-            icon: Icons.favorite_outline,
-            pokemon: pokemon,
-            onPressed: () {
-              var uid = BlocProvider.of<AuthCubit>(context).currentUser!.uid;
-              BlocProvider.of<FavouriteCubit>(context)
-                  .addFavouritePokemon(pokemon, uid);
-            },
-          );
-        },
+      child: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: ListView.builder(
+          itemCount: pokemons.length,
+          itemBuilder: (context, index) {
+            PokemonModel pokemon = pokemons[index];
+            return PokemonViewWidget(
+              icon: Icons.favorite_outline,
+              pokemon: pokemon,
+              onPressed: () {
+                var uid = BlocProvider.of<AuthCubit>(context).currentUser!.uid;
+                BlocProvider.of<FavouriteCubit>(context)
+                    .addFavouritePokemon(pokemon, uid);
+              },
+            );
+          },
+        ),
       ),
     );
   }

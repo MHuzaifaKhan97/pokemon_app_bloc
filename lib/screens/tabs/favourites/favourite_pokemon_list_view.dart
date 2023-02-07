@@ -20,20 +20,23 @@ class FavouritePokemonListView extends StatelessWidget {
           Utils.snackbar(state.message, context, AppTheme.colorError);
         }
       },
-      child: ListView.builder(
-        itemCount: pokemons.length,
-        itemBuilder: (context, index) {
-          PokemonModel pokemon = pokemons[index];
-          return PokemonViewWidget(
-            icon: Icons.remove_circle_outline,
-            pokemon: pokemon,
-            onPressed: () {
-              var uid = BlocProvider.of<AuthCubit>(context).currentUser!.uid;
-              BlocProvider.of<FavouriteCubit>(context)
-                  .removeFavouritePokemon(pokemon, uid);
-            },
-          );
-        },
+      child: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: ListView.builder(
+          itemCount: pokemons.length,
+          itemBuilder: (context, index) {
+            PokemonModel pokemon = pokemons[index];
+            return PokemonViewWidget(
+              icon: Icons.remove_circle_outline,
+              pokemon: pokemon,
+              onPressed: () {
+                var uid = BlocProvider.of<AuthCubit>(context).currentUser!.uid;
+                BlocProvider.of<FavouriteCubit>(context)
+                    .removeFavouritePokemon(pokemon, uid);
+              },
+            );
+          },
+        ),
       ),
     );
   }
