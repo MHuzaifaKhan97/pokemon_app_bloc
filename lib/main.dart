@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_cubit.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_state.dart';
-import 'package:pokemon_app_bloc/logic/cubits/favourite_cubit/favourite_cubit.dart';
-import 'package:pokemon_app_bloc/logic/cubits/pokemon_cubit/pokemon_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/pokemon_cubit/pokemon_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
 import 'package:pokemon_app_bloc/screens/home_screen.dart';
 import 'package:pokemon_app_bloc/screens/login_screen.dart';
 import 'package:pokemon_app_bloc/screens/splash_screen.dart';
@@ -29,36 +30,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
-        primary: const Color(0xFF1e81b0),
+        primary: AppTheme.primaryColor,
       )),
-      // home: BlocProvider(
-      //   create: (context) => AuthCubit(),
-      //   child: SplashScreen(),
-      // ),
-      // home: MultiBlocProvider(
-      //   providers: [
-      //     BlocProvider(create: ((context) => SplashCubit())),
-      //     BlocProvider(create: ((context) => AuthCubit())),
-      //   ],
-      //   child: BlocBuilder<SplashCubit, SplashState>(
-      //     builder: (context, state) {
-      //       if (state is SplashDoneState) {
-      //         return BlocBuilder<AuthCubit, AuthState>(
-      //           buildWhen: (previous, current) => previous is AuthInitialState,
-      //           builder: (context, state) {
-      //             if (state is AuthLoggedInState) {
-      //               return HomeScreen();
-      //             } else if (state is AuthLoggedOutState) {
-      //               return LoginScreen();
-      //             }
-      //             return Scaffold();
-      //           },
-      //         );
-      //       }
-      //       return SplashScreen();
-      //     },
-      //   ),
-      // ),
       home: BlocProvider(
         create: (context) => AuthCubit(),
         child: BlocBuilder<AuthCubit, AuthState>(
@@ -75,7 +48,6 @@ class MyApp extends StatelessWidget {
           },
         ),
       ),
-      // home: SplashScreen(),
     );
   }
 }

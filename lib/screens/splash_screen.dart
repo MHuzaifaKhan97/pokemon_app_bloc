@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
 import 'package:pokemon_app_bloc/widgets/logo_widget.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1e81b0),
+      backgroundColor: AppTheme.primaryColor,
       body: Center(child: Hero(tag: "logo", child: LogoWidget())),
     );
   }

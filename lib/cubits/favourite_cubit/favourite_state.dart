@@ -19,4 +19,9 @@ class FavouriteAddFavouriteState extends FavouriteState {
   FavouriteAddFavouriteState(this.message);
 }
 
+class FavouriteRemovedFavouriteState extends FavouriteState {
+  final String message;
+  FavouriteRemovedFavouriteState(this.message);
+}
+
 class FavouriteEmptyListState extends FavouriteState {}

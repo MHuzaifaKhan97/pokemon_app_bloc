@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app_bloc/data/models/pokemon_model.dart';
-import 'package:pokemon_app_bloc/logic/cubits/favourite_cubit/favourite_state.dart';
+import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_state.dart';
+import 'package:pokemon_app_bloc/resources/global_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavouriteCubit extends Cubit<FavouriteState> {
@@ -15,7 +16,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
 
   getFavouritePokemons() async {
     final SharedPreferences prefs = await _prefs;
-    var encodedData = prefs.getString("favourites");
+    var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
     if (encodedData != null) {
       List<dynamic> decodedData = jsonDecode(encodedData);
       List<PokemonModel> pokemons =
@@ -36,7 +37,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
 
   addFavouritePokemon(PokemonModel pokemon, String uid) async {
     final SharedPreferences prefs = await _prefs;
-    var encodedData = prefs.getString("favourites");
+    var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
     List<PokemonModel> pokemons = <PokemonModel>[];
     if (encodedData != null) {
       List<dynamic> decodedData = jsonDecode(encodedData);
@@ -48,12 +49,8 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     pokemon.uid = uid;
     pokemons.add(pokemon);
     String encodedList = jsonEncode(pokemons);
-    prefs.setString("favourites", encodedList);
-    emit(FavouriteAddFavouriteState("successfully added to favorites"));
+    prefs.setString(GlobalConstants.FAVOURITES, encodedList);
+    emit(FavouriteAddFavouriteState("Successfully added to favorites"));
     getFavouritePokemons();
   }
-
-  // String toCapitalized(String value) {
-  //   return value[0].toUpperCase() + value.substring(1);
-  // }
 }

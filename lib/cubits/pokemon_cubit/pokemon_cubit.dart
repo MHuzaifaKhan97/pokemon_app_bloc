@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app_bloc/data/models/pokemon_model.dart';
 import 'package:pokemon_app_bloc/data/repositories/pokemon_repository.dart';
-import 'package:pokemon_app_bloc/logic/cubits/pokemon_cubit/pokemon_state.dart';
+import 'package:pokemon_app_bloc/cubits/pokemon_cubit/pokemon_state.dart';
 
 class PokemonCubit extends Cubit<PokemonState> {
   PokemonCubit() : super(PokemonLoadingState()) {

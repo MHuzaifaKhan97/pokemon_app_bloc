@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -6,27 +7,15 @@ class CustomButton extends StatelessWidget {
     this.onTap,
     this.isLoading = false,
     this.title,
-    // this.inverseStyle = false,
     this.width,
     this.height,
-    // this.buttonColor,
     this.icon,
-    // this.titleColor,
-    // this.titleFontSize,
-    // this.gradient,
-    // this.borderColor,
   }) : super(key: key);
   final Function()? onTap;
   final String? title;
   final double? width;
   final double? height;
-  // final Color? buttonColor;
-  // final Gradient? gradient;
-  // final Color? titleColor;
-  // final bool inverseStyle;
   final bool isLoading;
-  // final titleFontSize;
-  // final borderColor;
   final Widget? icon;
 
   @override
@@ -35,10 +24,9 @@ class CustomButton extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width * 0.90,
       height: height ?? 45,
       decoration: BoxDecoration(
-          // gradient: gradient,
-          color: Color(0xFF1e81b0),
+          color: AppTheme.primaryColor,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 2, color: Color(0xFF1e81b0))),
+          border: Border.all(width: 2, color: AppTheme.primaryColor)),
       child: MaterialButton(
         onPressed: onTap,
         child: isLoading

@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pokemon_app_bloc/clipper/cliper.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_cubit.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
+import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/screens/home_screen.dart';
 import 'package:pokemon_app_bloc/screens/signup_screen.dart';
 import 'package:pokemon_app_bloc/widgets/custom_button.dart';
@@ -44,12 +46,12 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05),
-                      const Text(
+                      Text(
                         "Sign In",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 32,
-                          color: Color(0xFF1e81b0),
+                          color: AppTheme.primaryColor,
                         ),
                       ),
                       SizedBox(
@@ -59,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF1e81b0).withOpacity(0.6),
+                          color: AppTheme.primaryColor.withOpacity(0.6),
                         ),
                       ),
                       SizedBox(
@@ -122,15 +124,11 @@ class LoginScreen extends StatelessWidget {
                                                   BlocProvider(
                                                     create: (context) =>
                                                         AuthCubit(),
-                                                    child: HomeScreen(),
+                                                    child: const HomeScreen(),
                                                   ))));
                                     } else if (state is AuthErrorState) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              backgroundColor: Colors.red,
-                                              duration:
-                                                  const Duration(seconds: 1),
-                                              content: Text(state.error)));
+                                      Utils.snackbar(state.error, context,
+                                          AppTheme.colorError);
                                     }
                                   },
                                   builder: (context, state) {
@@ -181,8 +179,8 @@ class LoginScreen extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Sign up',
-                                  style: const TextStyle(
-                                      color: Color(0xFF1e81b0),
+                                  style: TextStyle(
+                                      color: AppTheme.primaryColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700),
                                   recognizer: TapGestureRecognizer()
@@ -190,7 +188,7 @@ class LoginScreen extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: ((context) =>
-                                                  SignUpScreen())));
+                                                  const SignUpScreen())));
                                     })
                             ]),
                       ),

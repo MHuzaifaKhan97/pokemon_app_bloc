@@ -1,11 +1,12 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
 
 class RPSCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Color(0xFF1e81b0)
+      ..color = AppTheme.primaryColor
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 
@@ -49,7 +50,7 @@ class PSCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Color(0xFF1e81b0).withOpacity(0.5)
+      ..color = AppTheme.primaryColor.withOpacity(0.5)
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 

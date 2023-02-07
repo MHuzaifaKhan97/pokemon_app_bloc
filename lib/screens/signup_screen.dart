@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pokemon_app_bloc/clipper/cliper.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_cubit.dart';
-import 'package:pokemon_app_bloc/logic/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
+import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_state.dart';
+import 'package:pokemon_app_bloc/resources/app_theme.dart';
+import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/screens/home_screen.dart';
 import 'package:pokemon_app_bloc/screens/login_screen.dart';
 import 'package:pokemon_app_bloc/widgets/custom_button.dart';
@@ -44,12 +46,12 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05),
-                      const Text(
+                      Text(
                         "Create Account",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 32,
-                          color: Color(0xFF1e81b0),
+                          color: AppTheme.primaryColor,
                         ),
                       ),
                       SizedBox(
@@ -113,15 +115,11 @@ class SignUpScreen extends StatelessWidget {
                                                   BlocProvider(
                                                     create: (context) =>
                                                         AuthCubit(),
-                                                    child: HomeScreen(),
+                                                    child: const HomeScreen(),
                                                   ))));
                                     } else if (state is AuthErrorState) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              backgroundColor: Colors.red,
-                                              duration:
-                                                  const Duration(seconds: 1),
-                                              content: Text(state.error)));
+                                      Utils.snackbar(state.error, context,
+                                          AppTheme.colorError);
                                     }
                                   },
                                   builder: (context, state) {
@@ -172,8 +170,8 @@ class SignUpScreen extends StatelessWidget {
                             children: <TextSpan>[
                               TextSpan(
                                   text: ' Sign in',
-                                  style: const TextStyle(
-                                      color: Color(0xFF1e81b0),
+                                  style: TextStyle(
+                                      color: AppTheme.primaryColor,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700),
                                   recognizer: TapGestureRecognizer()
