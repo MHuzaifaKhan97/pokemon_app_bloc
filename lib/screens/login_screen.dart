@@ -10,7 +10,8 @@ import 'package:pokemon_app_bloc/resources/app_theme.dart';
 import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/screens/home_screen.dart';
 import 'package:pokemon_app_bloc/screens/signup_screen.dart';
-import 'package:pokemon_app_bloc/widgets/custom_button.dart';
+import 'package:pokemon_app_bloc/widgets/custom_button_widget.dart';
+import 'package:pokemon_app_bloc/widgets/rich_text_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -166,34 +167,16 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(bottom: 22),
-                    child: Center(
-                      child: RichText(
-                        text: TextSpan(
-                            text: 'Don\'t have an account?',
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: ' Sign up',
-                                  style: TextStyle(
-                                      color: AppTheme.primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  const SignUpScreen())));
-                                    })
-                            ]),
-                      ),
-                    ),
-                  ))
+                bottom: 0,
+                child: RichTextTappableWidget(
+                  firstText: 'Don\'t have an account?',
+                  secondText: ' Sign up',
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => const SignUpScreen())));
+                  },
+                ),
+              ),
             ],
           ),
         ),

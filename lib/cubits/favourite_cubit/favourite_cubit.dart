@@ -29,7 +29,6 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       } else {
         emit(FavouriteLoadedState(filteredPokemon));
       }
-      // return filteredPokemon;
     } else {
       emit(FavouriteEmptyListState());
     }

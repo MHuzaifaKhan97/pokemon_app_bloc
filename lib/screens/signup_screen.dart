@@ -10,7 +10,8 @@ import 'package:pokemon_app_bloc/resources/app_theme.dart';
 import 'package:pokemon_app_bloc/resources/utils.dart';
 import 'package:pokemon_app_bloc/screens/home_screen.dart';
 import 'package:pokemon_app_bloc/screens/login_screen.dart';
-import 'package:pokemon_app_bloc/widgets/custom_button.dart';
+import 'package:pokemon_app_bloc/widgets/custom_button_widget.dart';
+import 'package:pokemon_app_bloc/widgets/rich_text_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -157,36 +158,16 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Center(
-                      child: RichText(
-                        text: TextSpan(
-                            text: 'Already have account?',
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 18),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: ' Sign in',
-                                  style: TextStyle(
-                                      color: AppTheme.primaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.of(context)
-                                          .popUntil((route) => route.isFirst);
-                                      Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  LoginScreen())));
-                                    })
-                            ]),
-                      ),
-                    ),
-                  ))
+                bottom: 0,
+                child: RichTextTappableWidget(
+                    firstText: 'Already have account?',
+                    secondText: ' Sign in',
+                    onTap: () {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: ((context) => const LoginScreen())));
+                    }),
+              ),
             ],
           ),
         ),
