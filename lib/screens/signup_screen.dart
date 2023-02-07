@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -63,7 +64,9 @@ class SignUpScreen extends StatelessWidget {
                             children: [
                               FormBuilderTextField(
                                 name: "email",
-                                maxLength: 40,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(40),
+                                ],
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
                                       errorText: "Email is required"),
@@ -83,7 +86,9 @@ class SignUpScreen extends StatelessWidget {
                                       0.02),
                               FormBuilderTextField(
                                 name: "password",
-                                maxLength: 20,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(20),
+                                ],
                                 obscureText: true,
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
