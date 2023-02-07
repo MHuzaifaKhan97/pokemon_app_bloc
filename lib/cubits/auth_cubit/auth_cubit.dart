@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitialState()) {
     navigateToHomeOrSignIn();
   }
-
+  // Create User
   void createUser() async {
     try {
       var email = signUpFormKey.currentState!.value["email"];
@@ -32,6 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+// Logged In User
   void logIn() async {
     try {
       var email = loginFormKey.currentState!.value["email"];
@@ -47,6 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  // Check user exists and navigate to home
   Future navigateToHomeOrSignIn() async {
     emit(AuthInitialState());
     await Future.delayed(const Duration(seconds: 2));
@@ -61,26 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // void verifyOTP(String otp) async {
-  //   emit(AuthLoadingState());
-
-  //   PhoneAuthCredential credential = PhoneAuthProvider.credential(
-  //       verificationId: _verificationId!, smsCode: otp);
-  //   signInWithPhone(credential);
-  // }
-
-  // void signInWithPhone(PhoneAuthCredential credential) async {
-  //   try {
-  //     UserCredential userCredential =
-  //         await _auth.signInWithCredential(credential);
-  //     if (userCredential.user != null) {
-  //       emit(AuthLoggedInState(userCredential.user!));
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     emit(AuthErrorState(e.message.toString()));
-  //   }
-  // }
-
+  // Log out
   void loggedOut() async {
     await _auth.signOut();
     emit(AuthLoggedOutState());

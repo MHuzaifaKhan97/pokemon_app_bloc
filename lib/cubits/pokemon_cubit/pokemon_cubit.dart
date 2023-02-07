@@ -6,24 +6,27 @@ import 'package:pokemon_app_bloc/cubits/pokemon_cubit/pokemon_state.dart';
 
 class PokemonCubit extends Cubit<PokemonState> {
   PokemonCubit() : super(PokemonLoadingState()) {
-    fetchPosts();
+    fetchPokemon();
   }
+  // Pokemon Repository
   final PokemonRepository _pokemonRepository = PokemonRepository();
 
-  void fetchPosts() async {
+  // Fetch pokemon from api
+  void fetchPokemon() async {
     try {
       List<PokemonModel> pokemons = await _pokemonRepository.fetchPokemon();
       emit(PokemonLoadedState(pokemons));
     } on DioError catch (e) {
       if (e.type == DioErrorType.other) {
         emit(PokemonErrorState(
-            "Can't fetch posts, please check your internet conenction!"));
+            "Can't fetch data, please check your internet conenction!"));
       } else {
         emit(PokemonErrorState(e.message.toString()));
       }
     }
   }
 
+  // Convert text to capitalized
   String toCapitalized(String value) {
     return value[0].toUpperCase() + value.substring(1);
   }

@@ -8,7 +8,9 @@ class PokemonRepository {
     try {
       Response response = await api.sendRequest.get("/pokemon");
       List<dynamic> pokemonModel = response.data["results"];
-      return pokemonModel.map((post) => PokemonModel.fromJson(post)).toList();
+      return pokemonModel
+          .map((pokemonObj) => PokemonModel.fromJson(pokemonObj))
+          .toList();
     } catch (e) {
       throw e;
     }

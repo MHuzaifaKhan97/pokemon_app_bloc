@@ -12,15 +12,18 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   }
   // Firebase Auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // SharedPreferences
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  // Get Favourite Pokemons
   getFavouritePokemons() async {
     final SharedPreferences prefs = await _prefs;
     var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
     if (encodedData != null) {
       List<dynamic> decodedData = jsonDecode(encodedData);
-      List<PokemonModel> pokemons =
-          decodedData.map((post) => PokemonModel.fromJson(post)).toList();
+      List<PokemonModel> pokemons = decodedData
+          .map((pokemonObj) => PokemonModel.fromJson(pokemonObj))
+          .toList();
       List<PokemonModel> filteredPokemon = pokemons
           .where((pokemon) => pokemon.uid == _auth.currentUser!.uid)
           .toList();
@@ -34,14 +37,16 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     }
   }
 
+  // Add Favourite Pokemons
   addFavouritePokemon(PokemonModel pokemon, String uid) async {
     final SharedPreferences prefs = await _prefs;
     var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
     List<PokemonModel> pokemons = <PokemonModel>[];
     if (encodedData != null) {
       List<dynamic> decodedData = jsonDecode(encodedData);
-      pokemons =
-          decodedData.map((post) => PokemonModel.fromJson(post)).toList();
+      pokemons = decodedData
+          .map((pokemonObj) => PokemonModel.fromJson(pokemonObj))
+          .toList();
     } else {
       pokemons = <PokemonModel>[];
     }
@@ -61,14 +66,16 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     getFavouritePokemons();
   }
 
+// Remove Favourite Pokemons
   removeFavouritePokemon(PokemonModel pokemon, String uid) async {
     final SharedPreferences prefs = await _prefs;
     var encodedData = prefs.getString(GlobalConstants.FAVOURITES);
     List<PokemonModel> pokemons = <PokemonModel>[];
     if (encodedData != null) {
       List<dynamic> decodedData = jsonDecode(encodedData);
-      pokemons =
-          decodedData.map((post) => PokemonModel.fromJson(post)).toList();
+      pokemons = decodedData
+          .map((pokemonObj) => PokemonModel.fromJson(pokemonObj))
+          .toList();
     } else {
       pokemons = <PokemonModel>[];
     }
