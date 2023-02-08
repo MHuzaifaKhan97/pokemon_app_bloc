@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app_bloc/cubits/auth_cubit/auth_cubit.dart';
 import 'package:pokemon_app_bloc/cubits/favourite_cubit/favourite_cubit.dart';
@@ -13,11 +14,14 @@ import 'package:pokemon_app_bloc/screens/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: ((context) => AuthCubit())),
-    BlocProvider(create: ((context) => PokemonCubit())),
-    BlocProvider(create: ((context) => FavouriteCubit())),
-  ], child: const MyApp()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MultiBlocProvider(providers: [
+      BlocProvider(create: ((context) => AuthCubit())),
+      BlocProvider(create: ((context) => PokemonCubit())),
+      BlocProvider(create: ((context) => FavouriteCubit())),
+    ], child: const MyApp()));
+  });
 }
 
 class MyApp extends StatelessWidget {
